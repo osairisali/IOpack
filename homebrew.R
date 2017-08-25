@@ -24,20 +24,25 @@ agr2 <- function(data, index){
 }
 
 #versi fungsi agr yg lbh kompak
-agr3 <- function(data, index) {
-  ifelse( nrow(data) == ncol(data),
-          nol <- matrix(0,
-                        length(unique(index[ , 1])),
-                        ncol(data)),
-          nol <- matrix(0,
-                        length(unique(index[ , 1])),
-                        nrow(data))
-          )
-  nol[index] <- 1
-  ifelse(nrow(data) == ncol(data), 
-         agr3 <- nol %*% data %*% t(nol),
-         agr3 <- nol %*% data)
-  agr3
+agr <- function(data, index) {
+  ifelse(
+    nrow(data) == ncol(data),
+    {#if the result is conformable, then
+      nol <- matrix(0,
+                    length(unique(index[ , 1])),
+                    ncol(data))
+      nol[index] <- 1
+      agr <- nol %*% data %*% t(nol)
+    },
+    {#if the result is non conformable, then
+      nol <- matrix(0,
+                    length(unique(index[ , 1])),
+                    nrow(data))
+      nol[index] <- 1
+      agr <- nol %*% data
+    }
+  )
+  agr
 }
 #1. AGREGASI IO 47X47 SEKTOR--------------------------------------------
 
